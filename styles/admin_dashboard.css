@@ -1,0 +1,147 @@
+:root {
+    --primary-color: #e6a120;
+    --text-color: #ffffff;
+    --background-color: #000000;
+    --secondary-color: #1c1c1e;
+    --light-background: rgba(52, 51, 51, 0.8);
+    --border-color: #333333;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    color: var(--text-color);
+    background-color: var(--background-color);
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    background-color: var(--secondary-color);
+    padding: 1rem;
+    color: var(--text-color);
+}
+
+header h1 {
+    margin: 0;
+}
+
+nav ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+nav ul li {
+    display: inline;
+    margin-right: 1rem;
+}
+
+nav ul li a {
+    color: var(--text-color);
+    text-decoration: none;
+    font-weight: bold;
+}
+
+nav ul li a:hover {
+    color: var(--primary-color);
+}
+
+main {
+    padding: 2rem;
+}
+
+section {
+    background-color: var(--secondary-color);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    margin-bottom: 2rem;
+    padding: 1rem;
+}
+
+h2 {
+    border-bottom: 2px solid var(--primary-color);
+    padding-bottom: 0.5rem;
+    margin-bottom: 1rem;
+}
+
+form {
+    margin-bottom: 1rem;
+}
+
+input[type="text"],
+input[type="number"],
+input[type="email"],
+textarea,
+select {
+    width: 100%;
+    padding: 0.5rem;
+    margin: 0.5rem 0;
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    background-color: var(--light-background);
+    color: var(--text-color);
+}
+
+input[type="submit"],
+button {
+    background-color: var(--primary-color);
+    color: var(--text-color);
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+input[type="submit"]:hover,
+button:hover {
+    background-color: #d68a1c;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 1rem;
+}
+
+table th,
+table td {
+    padding: 0.75rem;
+    border: 1px solid var(--primary-color);
+}
+
+table th {
+    background-color: var(--primary-color);
+    color: var(--text-color);
+    text-align: left;
+}
+
+table td {
+    background-color: var(--light-background);
+}
+
+img {
+    max-width: 100px;
+    height: auto;
+    border-radius: 4px;
+}
+
+@media (max-width: 768px) {
+    header {
+        text-align: center;
+    }
+
+    nav ul {
+        text-align: center;
+    }
+
+    nav ul li {
+        display: block;
+        margin-bottom: 0.5rem;
+    }
+
+    form input,
+    form textarea,
+    form select {
+        width: 100%;
+    }
+}

@@ -1,0 +1,50 @@
+/* Basic styling for test elements */
+
+.test-header {
+    background-color: #ff0000;
+    padding: 20px;
+    text-align: center;
+    border-bottom: 2px solid #ff0000;
+}
+
+.test-title {
+    color: #333;
+    font-size: 24px;
+}
+
+.test-main {
+    padding: 20px;
+    text-align: center;
+}
+
+.test-button {
+    margin-top: 30vh;
+    background-color: #007bff;
+    color: rgb(255, 0, 0);
+    border: none;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.test-button:hover {
+    
+    background-color: #0056b3;
+}
+
+.test-text {
+    font-size: 18px;
+    color: #555;
+}
+
+.test-footer {
+    background-color: #ff0000;
+    padding: 10px;
+    text-align: center;
+    border-top: 2px solid #ff0000;
+}
+
+.test-footer-text {
+    color: #333;
+}

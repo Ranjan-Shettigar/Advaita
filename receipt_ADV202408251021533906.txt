@@ -1,0 +1,25 @@
+give me responsive css for both desktop and mobile version
+
+user these colors schemes
+
+:root {
+
+    --primary-color: #e6a120;
+
+    --text-color: #ffffff;
+
+    --background-color: #000000;
+
+    --secondary-color: #1c1c1e;
+
+    --light-background: rgba(52, 51, 51, 0.8);
+
+    --border-color: #333333;
+
+}
+
+
+
+
+
+

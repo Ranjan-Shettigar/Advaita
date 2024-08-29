@@ -1,0 +1,157 @@
+:root {
+    --primary-color: #e6a120;
+    --text-color: #ffffff;
+    --background-color: #000000;
+    --secondary-color: #1c1c1e;
+    --input-background: #2c2c2e;
+    --border-color: #333333;
+}
+
+body, html {
+    margin: 0;
+    padding: 0;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    height: 100%;
+    background-color: var(--background-color);
+    color: var(--text-color);
+}
+
+.home {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background: rgba(0, 0, 0, 0.85);
+    position: relative;
+}
+
+.blur-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(10px);
+}
+
+.login-container {
+    background-color: var(--secondary-color);
+    padding: 2rem;
+    border-radius: 15px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+    z-index: 1;
+    max-width: 400px;
+    width: 90%;
+    text-align: center;
+    margin: 0 1rem; /* Add margin for small screens */
+}
+
+h2 {
+    color: var(--primary-color);
+    margin-bottom: 1.5rem;
+    font-size: 1.5rem;
+}
+
+.input-group {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 1rem;
+}
+
+input[type="text"],
+input[type="password"] {
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    background-color: var(--input-background);
+    color: var(--text-color);
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.2);
+    font-size: 1rem;
+    transition: border-color 0.3s, box-shadow 0.3s;
+    max-width: 350px;
+}
+
+input[type="text"]:focus,
+input[type="password"]:focus {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 5px var(--primary-color);
+    outline: none;
+}
+
+input[type="text"]::placeholder,
+input[type="password"]::placeholder {
+    color: rgba(255, 255, 255, 0.7);
+}
+
+button {
+    width: 100%;
+    max-width: 350px;
+    padding: 0.75rem;
+    background-color: var(--primary-color);
+    color: var(--background-color);
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 1rem;
+    transition: background-color 0.3s;
+    margin-top: 1rem;
+}
+
+button:hover {
+    background-color: #e5941f;
+}
+
+.error-message {
+    color: #ff4d4d;
+    margin-top: 1rem;
+    font-size: 0.875rem;
+}
+
+.up-link {
+    margin-top: 1rem;
+    font-size: 0.875rem;
+}
+
+.up-link a {
+    color: var(--primary-color);
+    text-decoration: none;
+}
+
+.up-link a:hover {
+    text-decoration: underline;
+}
+button {
+    padding: 0.65rem; /* Slightly smaller button padding */
+    max-width: 95%; /* Full width button */
+}
+/* Media Query for Mobile Devices */
+@media (max-width: 600px) {
+    .login-container {
+        padding: 1.5rem;
+        width: 100%; /* Allow full width for smaller screens */
+        max-width: 90%; /* Adjust max width to ensure it's not too narrow */
+        border-radius: 10px; /* Slightly smaller border-radius for mobile */
+    }
+
+    h2 {
+        font-size: 1.25rem;
+    }
+
+    input[type="text"],
+    input[type="password"] {
+        padding: 0.65rem; /* Slightly smaller padding on mobile */
+        max-width: 100%; /* Full width inputs */
+    }
+
+    button {
+        padding: 0.65rem; /* Slightly smaller button padding */
+        max-width: 100%; /* Full width button */
+    }
+
+    .input-group {
+        margin-bottom: 0.75rem; /* Slightly reduce spacing between input fields */
+    }
+}

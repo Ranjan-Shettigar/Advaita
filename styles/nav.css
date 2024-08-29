@@ -1,0 +1,213 @@
+/* @import url('https://fonts.googleapis.com/css2?family=SF+Pro+Display:wght@300;400;600&display=swap');
+
+:root {
+    --primary-color: #e6a120;
+    --text-color: #ffffff;
+    --background-color: #000000;
+    --secondary-color: #1c1c1e;
+    --light-background: rgba(52, 51, 51, 0.8);
+    --border-color: #333333;
+}
+body,
+html {
+    margin: 0;
+    padding: 0;
+    font-family: 'SF Pro Display', Arial, sans-serif;
+    height: 100%;
+    background-color: var(--background-color);
+    color: var(--text-color);
+    overflow-x: hidden;
+}
+
+body::-webkit-scrollbar {
+    width: 0;
+} */
+
+
+header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 10px 5%;
+    box-sizing: border-box;
+    z-index: 1000;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.nav-menu-container {
+    display: flex;
+    align-items: center;
+}
+
+.top-nav {
+    display: flex;
+    align-items: center;
+    margin-right: 20px;
+    /* Add spacing between nav and menu icon */
+}
+
+.nav-item {
+    font-size: 16px;
+    color: var(--text-color);
+    text-decoration: none;
+    transition: all 0.3s ease;
+    padding: 10px;
+    border-radius: 5px;
+    margin-left: 20px;
+}
+
+.nav-item:hover {
+    color: var(--primary-color);
+    background-color: rgba(230, 161, 32, 0.1);
+}
+
+.menu-icon {
+    display: inline-block;
+    width: 24px;
+    /* Set the width of the icon */
+    height: 24px;
+    /* Set the height of the icon */
+    font-size: 24px;
+    /* This will scale the icon to fit the set size */
+    line-height: 24px;
+    /* Center the icon vertically */
+    text-align: center;
+    /* Center the icon horizontally if it's inside a container */
+    cursor: pointer;
+    color: var(--primary-color);
+    transition: transform 0.3s ease;
+}
+
+
+.menu-icon:hover {
+    transform: scale(1.1);
+}
+
+
+
+/* Dropdown menu styles */
+.menu-dropdown {
+    display: none;
+    /* Hidden by default */
+    position: absolute;
+    top: 60px;
+    right: 60px;
+    background-color: rgba(52, 51, 51, 0.738);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-radius: 8px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    z-index: 1000;
+    /* Ensure it appears above content */
+    overflow: hidden;
+    text-align: center;
+}
+
+@media (max-width: 768px) {
+    .menu-dropdown {
+        right: 20px;
+        top: 20px;
+
+    }
+}
+
+.dropdown-item {
+    display: block;
+    padding: 12px 20px;
+    font-size: 16px;
+    color: var(--text-color);
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+}
+
+.dropdown-item:hover {
+    background-color: var(--primary-color);
+}
+
+.a-text {
+    padding-top: 10px;
+    font-size: 18px;
+    font-weight: 400;
+    color: var(--primary-color);
+}
+
+.a-text span {
+    display: block;
+    font-size: 12px;
+    font-weight: 100;
+    opacity: 40%;
+    color: var(--text-color);
+    margin-top: 2px;
+}
+
+
+.bottom-nav {
+    display: none;
+}
+
+/* Mobile styles */
+@media (max-width: 768px) {
+    .top-nav {
+        display: none;
+    }
+
+    .menu-icon {
+        display: block;
+    }
+
+    .nav-menu-container {
+        justify-content: flex-end;
+    }
+
+    .bottom-nav {
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        padding: 10px 0;
+        background-color: rgba(52, 51, 51, 0.8);
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+        position: fixed;
+        width: 100%;
+        bottom: 0;
+        left: 0;
+        z-index: 1000;
+        box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.2);
+    }
+
+    .nav-item {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        font-size: 12px;
+        margin-left: 0;
+    }
+
+    .nav-item i {
+        font-size: 24px;
+        margin-bottom: 5px;
+    }
+
+    .main-content {
+        padding-top: 70px;
+        padding-bottom: 70px;
+    }
+}
+
+/* Extra small devices */
+@media (max-width: 480px) {
+    .bottom-nav {
+        padding: 8px 0;
+    }
+
+    .nav-item {
+        font-size: 10px;
+    }
+
+    .nav-item i {
+        font-size: 20px;
+    }
+}
