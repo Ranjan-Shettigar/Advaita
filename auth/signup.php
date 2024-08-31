@@ -101,11 +101,39 @@ function validateAndRegisterUser($conn, $username, $email, $hashedPassword, $nam
     return "Something went wrong. Please try again.";
 }
 
+function generateAndStoreOTP($conn, $email) {
+    $otp = mt_rand(100000, 999999);
+    $otp_hash = password_hash($otp, PASSWORD_DEFAULT);
+
+    $stmt = $conn->prepare("INSERT INTO otp_store (email, otp_hash) VALUES (?, ?)");
+    $stmt->bind_param("ss", $email, $otp_hash);
+    
+    if ($stmt->execute()) {
+        return $otp;
+    }
+    return false;
+}
+
+function verifyOTP($conn, $email, $entered_otp) {
+    $stmt = $conn->prepare("SELECT otp_hash, otp_expires_at FROM otp_store WHERE email = ? ORDER BY id DESC LIMIT 1");
+    $stmt->bind_param("s", $email);
+    $stmt->execute();
+    $result = $stmt->get_result();
+
+    if ($row = $result->fetch_assoc()) {
+        if (strtotime($row['otp_expires_at']) < time()) {
+            return false; // OTP has expired
+        }
+        return password_verify($entered_otp, $row['otp_hash']);
+    }
+    return false;
+}
+
 $error = $success = '';
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     if (isset($_POST['change_email'])) {
-        unset($_SESSION['otp'], $_SESSION['email'], $_SESSION['otp_time']);
+        unset($_SESSION['email']);
         header("Location: " . $_SERVER['PHP_SELF']);
         exit();
     }
@@ -121,19 +149,17 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             if ($stmt->get_result()->num_rows > 0) {
                 $error = "You already have an account. Please log in.";
             } else {
-                if (!isset($_SESSION['otp']) || time() - $_SESSION['otp_time'] > 300) {
-                    $otp = mt_rand(100000, 999999);
+                $otp = generateAndStoreOTP($conn, $email);
+                if ($otp) {
                     $sendOTPStatus = sendOTPEmail($email, $otp);
                     if ($sendOTPStatus == 'Sent') {
-                        $_SESSION['otp'] = password_hash($otp, PASSWORD_DEFAULT);
                         $_SESSION['email'] = $email;
-                        $_SESSION['otp_time'] = time();
                         $success = "OTP sent successfully. Please check your email.";
                     } else {
                         $error = "Error sending OTP: " . $sendOTPStatus;
                     }
                 } else {
-                    $success = "OTP already sent. Please check your email.";
+                    $error = "Error generating OTP. Please try again.";
                 }
             }
         }
@@ -147,8 +173,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
         if (empty($enteredOTP) || empty($name) || empty($college) || empty($phone) || empty($username) || empty($password)) {
             $error = "All fields are required.";
-        } elseif (!password_verify($enteredOTP, $_SESSION['otp'])) {
-            $error = "Invalid OTP. Please try again.";
+        } elseif (!verifyOTP($conn, $_SESSION['email'], $enteredOTP)) {
+            $error = "Invalid or expired OTP. Please try again.";
         } elseif (!preg_match("/^[a-zA-Z ]*$/", $name)) {
             $error = "Name should only contain letters and spaces.";
         } elseif (!preg_match("/^[0-9]{10}$/", $phone)) {
