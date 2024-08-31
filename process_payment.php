@@ -13,10 +13,10 @@ $amount = $_POST['amount'];
 $items = $_POST['items'];
 
 // UPI details
-$upi_id = "yourupiid123@okhdfcbank";
-$payee_name = "Receiver Name";
-$currency = "INR";
-$aid = "uGICAgMDM4aL2Ng";
+// $upi_id = "yourupiid123@okhdfcbank";
+// $payee_name = "Receiver Name";
+// $currency = "INR";
+// $aid = "uGICAgMDM4aL2Ng";
 $upi_link = "upi://pay?pa=$upi_id&pn=" . urlencode($payee_name) . "&am=$amount&cu=$currency&aid=$aid";
 
 // Generate QR code
