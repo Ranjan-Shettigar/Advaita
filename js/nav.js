@@ -160,12 +160,12 @@ document.addEventListener('DOMContentLoaded', function () {
 
     document.getElementById('home-page').addEventListener('click', function (e) {
         e.preventDefault();
-        loadPage('./home.php', './styles/style.css', undefined);
+        loadPage('./home.php', './styles/home.css','./js/home.js');
     });
 
     document.getElementById('nav-home-page').addEventListener('click', function (e) {
         e.preventDefault();
-        loadPage('./home.php', './styles/style.css', undefined);
+        loadPage('./home.php', './styles/home.css', './js/home.js');
     });
 
     document.getElementById('event-page').addEventListener('click', function (e) {
@@ -211,5 +211,5 @@ document.addEventListener('DOMContentLoaded', function () {
     document.getElementById('nav-profile-page').addEventListener('click', checkLoginAndLoadProfile);
 
     // Load the home page by default when the page is ready
-    loadPage('./home.php', './styles/style.css', undefined, true);
+    loadPage('./home.php', './styles/home.css', './js/home.js', true);
 });

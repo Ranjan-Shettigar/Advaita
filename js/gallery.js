@@ -1,4 +1,4 @@
-
+function initializeEventHandlers() {
 document.addEventListener('DOMContentLoaded', function () {
     const gallery = document.querySelector('.gallery');
     const lightbox = document.querySelector('.lightbox');
@@ -56,3 +56,12 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     });
 });
+
+}
+
+// If you want the code to run immediately when loaded in a regular way, you can also add:
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initializeEventHandlers);
+} else {
+    initializeEventHandlers();
+}

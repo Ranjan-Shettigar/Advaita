@@ -37,6 +37,16 @@ header {
     align-items: center;
 }
 
+
+
+.top-nav .nav-item {
+    user-select: none;
+    -webkit-user-select: none; /* For Safari */
+    -moz-user-select: none;    /* For Firefox */
+    -ms-user-select: none;     /* For IE/Edge */
+}
+
+
 .nav-menu-container {
     display: flex;
     align-items: center;
@@ -65,24 +75,43 @@ header {
 }
 
 .menu-icon {
-    display: inline-block;
-    width: 24px;
-    /* Set the width of the icon */
-    height: 24px;
-    /* Set the height of the icon */
-    font-size: 24px;
-    /* This will scale the icon to fit the set size */
-    line-height: 24px;
-    /* Center the icon vertically */
-    text-align: center;
-    /* Center the icon horizontally if it's inside a container */
+    display: flex;
+    align-items: center;
+    gap: 10px; /* Space between the icons */
     cursor: pointer;
     color: var(--primary-color);
     transition: transform 0.3s ease;
 }
 
+.menu-icon i {
+    font-size: 24px;
+    text-align: center;
+}
 
-.menu-icon:hover {
+
+
+.cart-icon {
+    position: relative; /* This allows the cart count to be positioned relative to the icon */
+    display: inline-block;
+    margin-right: 20px;
+    color: var(--primary-color);
+   
+}
+
+#cart-count {
+    position: absolute;
+    top: -8px;
+    right: -8px;
+    background-color: var(--secondary-color);
+    color: var(--primary-color);
+    border-radius: 50%;
+    padding: 2px 6px;
+    font-size: 12px;
+}
+
+
+
+.menu-icon i:hover {
     transform: scale(1.1);
 }
 

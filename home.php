@@ -13,8 +13,8 @@ $username = $isLoggedIn ? $_SESSION['username'] : '';
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Advaita - The Unity of Excellence</title>
-    <link rel="stylesheet" href="./styles/main.css">
-    <link rel="stylesheet" href="./styles/style.css">
+    <link rel="stylesheet" href="./styles/main.css">  
+    <link rel="stylesheet" href="./styles/home.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 
@@ -30,13 +30,17 @@ $username = $isLoggedIn ? $_SESSION['username'] : '';
                     innovation, and collaborative energy.</p>
                 <div class="date">August | 28 | 2024</div>
                 <?php if (!$isLoggedIn) : ?>
-                    <button class="get-started" onclick="window.location.href='./auth/signup.php'">Get Started</button>
+
+                    <div class="button-container">
+                        <button class="get-started" onclick="window.location.href='./auth/signup.php'">Get Started</button>
+                    </div>
                 <?php else : ?>
                     <h3>Welcome, <?php echo htmlspecialchars($username); ?>!</h3>
                 <?php endif; ?>
             </div>
         </div>
     </div>
+    <script src="./js/home.js"></script>
 </body>
 
 </html>

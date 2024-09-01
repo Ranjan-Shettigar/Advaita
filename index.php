@@ -51,20 +51,30 @@ $cart_count = getCartCount();
                     ?>
                 </nav>
                 <div class="menu-icon">
+
+                    <?php if ($is_logged_in) : ?>
+                        <a href="cart.php" class="cart-icon">
+                            <i class="fas fa-shopping-cart"></i>
+                            <span id="cart-count"><?php echo htmlspecialchars($cart_count); ?></span>
+                        </a>
+                    <?php endif; ?>
                     <i class="fas fa-bars"></i>
                 </div>
+
+
+
                 <div class="menu-dropdown" id="menu-dropdown">
-                    <a id="sponsors" class="dropdown-item" >Sponsors</a>
+                    <a id="sponsors" class="dropdown-item">Sponsors</a>
                     <?php if (!$is_logged_in) : ?>
                         <a href="./auth/signup.php" class="dropdown-item">Register</a>
                     <?php endif; ?>
-                    <a id="about" class="dropdown-item" >About Us</a>
+                    <a id="about" class="dropdown-item">About Us</a>
 
-                    <a id="contact" class="dropdown-item" >Contact Us</a>
+                    <a id="contact" class="dropdown-item">Contact Us</a>
                     <!-- Dynamic Login/Logout and Cart -->
 
                     <?php if ($is_logged_in) : ?>
-                        <a href="cart.php" class="dropdown-item">Cart (<span id="cart-count"><?php echo htmlspecialchars($cart_count); ?></span>)</a>
+                        <!-- <a href="cart.php" class="dropdown-item">Cart (<span id="cart-count"><?php echo htmlspecialchars($cart_count); ?></span>)</a> -->
                         <a href="auth/logout.php" class="dropdown-item">Logout</a>
                     <?php else : ?>
                         <a href="auth/login.php" class="dropdown-item">Login</a>
