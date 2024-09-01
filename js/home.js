@@ -1,7 +1,7 @@
 function initializeEventHandlers() {
     const container = document.querySelector('.button-container');
     const button = container.querySelector('.get-started');
-
+    
     function createParticle() {
         const particle = document.createElement('div');
         particle.className = 'particle';
@@ -43,9 +43,15 @@ function initializeEventHandlers() {
 
     let particleInterval, starInterval;
 
+    function isMobile() {
+        return window.matchMedia("(max-width: 768px)").matches;
+    }
+
     button.addEventListener('mouseover', () => {
-        particleInterval = setInterval(createParticle, 100);
-        starInterval = setInterval(createShootingStar, 1500);
+        if (!isMobile()) {
+            particleInterval = setInterval(createParticle, 100);
+            starInterval = setInterval(createShootingStar, 1500);
+        }
     });
 
     button.addEventListener('mouseout', () => {
@@ -53,4 +59,3 @@ function initializeEventHandlers() {
         clearInterval(starInterval);
     });
 }
-
