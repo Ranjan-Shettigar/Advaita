@@ -15,41 +15,37 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $status = $_POST['status'];
     $current_status = $_POST['current_status'];
 
-    if ($status === 'failed') {
-        // Start a transaction
-        $conn->begin_transaction();
+    // Start a transaction
+    $conn->begin_transaction();
 
-        try {
-            // Update the status in the orders table
-            $stmt = $conn->prepare("UPDATE orders SET status = ? WHERE order_id = ? AND transaction_id = ?");
-            $stmt->bind_param('sss', $status, $order_id, $transaction_id);
-            $stmt->execute();
-            $stmt->close();
+    try {
+        // Update the status in the orders table
+        $stmt = $conn->prepare("UPDATE orders SET status = ? WHERE order_id = ? AND transaction_id = ?");
+        $stmt->bind_param('sss', $status, $order_id, $transaction_id);
+        $stmt->execute();
+        $stmt->close();
 
+        // Update the status in the user_purchases table
+        $stmt = $conn->prepare("UPDATE user_purchases SET status = ? WHERE order_id = ?");
+        $stmt->bind_param('ss', $status, $order_id);
+        $stmt->execute();
+        $stmt->close();
+
+        if ($status === 'failed') {
             // Delete the corresponding row from the user_purchases table
             $stmt = $conn->prepare("DELETE FROM user_purchases WHERE order_id = ?");
             $stmt->bind_param('s', $order_id);
             $stmt->execute();
             $stmt->close();
+        }
 
-            // If everything is successful, commit the transaction
-            $conn->commit();
-            $message = 'Order status updated to failed and removed from user purchases successfully.';
-        } catch (Exception $e) {
-            // If there's an error, roll back the changes
-            $conn->rollback();
-            $message = 'Error occurred: ' . $e->getMessage();
-        }
-    } else {
-        // Normal update process for non-failed statuses
-        $stmt = $conn->prepare("UPDATE orders SET status = ? WHERE order_id = ? AND transaction_id = ?");
-        $stmt->bind_param('sss', $status, $order_id, $transaction_id);
-        if ($stmt->execute()) {
-            $message = 'Order status updated successfully.';
-        } else {
-            $message = 'Failed to update order status.';
-        }
-        $stmt->close();
+        // If everything is successful, commit the transaction
+        $conn->commit();
+        $message = 'Order status updated successfully in both orders and user_purchases tables.';
+    } catch (Exception $e) {
+        // If there's an error, roll back the changes
+        $conn->rollback();
+        $message = 'Error occurred: ' . $e->getMessage();
     }
 }
 
@@ -157,36 +153,47 @@ $result = $conn->query($sql);
     </div>
     <script>
         $(document).ready(function() {
-            $('.update-form').on('submit', function(e) {
-                e.preventDefault();
-                var form = $(this);
-                var currentStatus = form.find('input[name="current_status"]').val();
-                var newStatus = form.find('select[name="status"]').val();
+    $('.update-form').on('submit', function(e) {
+        e.preventDefault();
+        var form = $(this);
+        var currentStatus = form.find('input[name="current_status"]').val();
+        var newStatus = form.find('select[name="status"]').val();
 
-                if (newStatus === 'failed') {
-                    if (confirm("Warning: Setting the status to 'failed' will remove this order from user purchases. Are you sure you want to proceed?")) {
-                        submitForm(form);
-                    }
-                } else if (currentStatus === 'completed' && newStatus !== 'completed') {
-                    if (confirm("Warning: You are changing the status from 'completed'. Are you sure you want to proceed?")) {
-                        submitForm(form);
-                    }
-                } else {
-                    submitForm(form);
-                }
-            });
+        if (newStatus === 'failed') {
+            if (confirm("Warning: Setting the status to 'failed' will remove this order from user purchases and update both orders and user_purchases tables. Are you sure you want to proceed?")) {
+                submitForm(form);
+            }
+        } else if (currentStatus === 'completed' && newStatus !== 'completed') {
+            if (confirm("Warning: You are changing the status from 'completed'. This will update both orders and user_purchases tables. Are you sure you want to proceed?")) {
+                submitForm(form);
+            }
+        } else {
+            submitForm(form);
+        }
+    });
 
-            function submitForm(form) {
-                $.ajax({
-                    url: 'admin.php',
-                    type: 'post',
-                    data: form.serialize(),
-                    success: function(response) {
-                        location.reload();
-                    }
-                });
+    function submitForm(form) {
+        $.ajax({
+            url: 'admin.php',
+            type: 'post',
+            data: form.serialize(),
+            success: function(response) {
+                location.reload();
+            },
+            error: function(xhr, status, error) {
+                console.error("An error occurred: " + error);
+                alert("An error occurred while updating the status. Please try again.");
             }
         });
+    }
+
+    // Optional: Add search functionality
+    $('#searchForm').on('submit', function(e) {
+        e.preventDefault();
+        var searchTerm = $('input[name="search"]').val();
+        window.location.href = 'admin.php?search=' + encodeURIComponent(searchTerm);
+    });
+});
     </script>
 </body>
 
