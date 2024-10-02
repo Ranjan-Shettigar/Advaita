@@ -119,8 +119,6 @@ function generateAndStoreOTP($conn, $email) {
     return false;
 }
 
-
-
 function verifyOTP($conn, $email, $entered_otp) {
     $stmt = $conn->prepare("SELECT otp_hash, otp_expires_at FROM otp_store WHERE email = ? ORDER BY id DESC LIMIT 1");
     $stmt->bind_param("s", $email);
