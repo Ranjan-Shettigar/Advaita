@@ -133,8 +133,9 @@ $events_result = $conn->query($events_query);
 </head>
 <body>
     <header>
-        <h1>Admin Dashboard</h1>
+        
         <nav>
+        <div class="nav-brand">Admin Dashboard</div>
             <ul>
                 <li><a href="admin.php">Admin</a></li> <!-- New link -->
                 <li><a href="#events">Events</a></li>

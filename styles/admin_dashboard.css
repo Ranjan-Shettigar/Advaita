@@ -23,32 +23,45 @@
   }
   
   header {
-    padding: 2rem 0;
-    border-bottom: 1px solid var(--border);
-    margin-bottom: 2rem;
+    background-color: var(--card);
+    box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+  }
+  
+  nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 2rem;
+    margin: 0 auto;
+  }
+  
+  .nav-brand {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--primary);
+  }
+  
+  nav ul {
+    display: flex;
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  nav ul li {
+    margin-left: 1rem;
+  }
+  
+  nav ul li a {
+    color: var(--primary);
+    text-decoration: none;
+    font-weight: 500;
   }
   
   h1 {
     font-size: 2rem;
     font-weight: 700;
-    letter-spacing: -0.025em;
-  }
-  
-  nav {
-    margin-top: 1rem;
-  }
-  
-  nav ul {
-    list-style-type: none;
-    display: flex;
-    gap: 2rem;
-  }
-  
-  nav a {
-    color: var(--foreground);
-    text-decoration: none;
-    font-weight: 500;
-    transition: opacity 0.2s ease-in-out;
+    margin-bottom: 2rem;
   }
   
   nav a:hover {
