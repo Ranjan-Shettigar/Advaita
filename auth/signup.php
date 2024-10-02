@@ -1,5 +1,5 @@
 <?php
-
+date_default_timezone_set('UTC');
 
 require_once '../includes/config.php';
 require_once 'smtp/PHPMailerAutoload.php';
@@ -107,14 +107,19 @@ function generateAndStoreOTP($conn, $email) {
     $otp = mt_rand(100000, 999999);
     $otp_hash = password_hash($otp, PASSWORD_DEFAULT);
 
-    $stmt = $conn->prepare("INSERT INTO otp_store (email, otp_hash) VALUES (?, ?)");
-    $stmt->bind_param("ss", $email, $otp_hash);
-    
+    // Generate expiration time in UTC (current time + 5 minutes)
+    $otp_expires_at = gmdate("Y-m-d H:i:s", strtotime('+5 minutes'));
+
+    $stmt = $conn->prepare("INSERT INTO otp_store (email, otp_hash, otp_expires_at) VALUES (?, ?, ?)");
+    $stmt->bind_param("sss", $email, $otp_hash, $otp_expires_at);
+
     if ($stmt->execute()) {
         return $otp;
     }
     return false;
 }
+
+
 
 function verifyOTP($conn, $email, $entered_otp) {
     $stmt = $conn->prepare("SELECT otp_hash, otp_expires_at FROM otp_store WHERE email = ? ORDER BY id DESC LIMIT 1");
