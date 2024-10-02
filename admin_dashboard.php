@@ -136,6 +136,7 @@ $events_result = $conn->query($events_query);
         <h1>Admin Dashboard</h1>
         <nav>
             <ul>
+                <li><a href="admin.php">Admin</a></li> <!-- New link -->
                 <li><a href="#events">Events</a></li>
                 <li><a href="#gallery">Gallery</a></li>
                 <li><a href="./auth/admin_logout.php">Logout</a></li>
@@ -152,7 +153,7 @@ $events_result = $conn->query($events_query);
                 <input type="text" name="title" id="gallery-title" placeholder="Title" required>
                 <textarea name="description" id="gallery-description" placeholder="Description"></textarea>
                 <input type="text" name="image_path" id="gallery-image_path" placeholder="Image Path" required>
-                <button type="submit">Add Gallery Image</button>
+                <button type="submit">Add Image</button>
             </form>
 
             <table>

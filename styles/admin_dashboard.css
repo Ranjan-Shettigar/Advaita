@@ -1,147 +1,204 @@
+/* admin_dashboard.css */
+
 :root {
-    --primary-color: #e6a120;
-    --text-color: #ffffff;
-    --background-color: #000000;
-    --secondary-color: #1c1c1e;
-    --light-background: rgba(52, 51, 51, 0.8);
-    --border-color: #333333;
-}
-
-body {
-    font-family: Arial, sans-serif;
-    color: var(--text-color);
-    background-color: var(--background-color);
+    --background: #ebebeb;
+    --foreground: #000000;
+    --border: #8b8b8b;
+    --hover: #ffffff;
+    --focus: #000000;
+  }
+  
+  * {
     margin: 0;
     padding: 0;
-}
-
-header {
-    background-color: var(--secondary-color);
-    padding: 1rem;
-    color: var(--text-color);
-}
-
-header h1 {
-    margin: 0;
-}
-
-nav ul {
-    list-style-type: none;
-    padding: 0;
-    margin: 0;
-}
-
-nav ul li {
-    display: inline;
-    margin-right: 1rem;
-}
-
-nav ul li a {
-    color: var(--text-color);
-    text-decoration: none;
-    font-weight: bold;
-}
-
-nav ul li a:hover {
-    color: var(--primary-color);
-}
-
-main {
-    padding: 2rem;
-}
-
-section {
-    background-color: var(--secondary-color);
-    border: 1px solid var(--border-color);
-    border-radius: 8px;
+    box-sizing: border-box;
+  }
+  
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    background-color: var(--background);
+    color: var(--foreground);
+    line-height: 1.8; /* Increase line-height for better readability */
+    padding: 0 2rem;
+  }
+  
+  header {
+    padding: 2rem 0;
+    border-bottom: 1px solid var(--border);
     margin-bottom: 2rem;
+  }
+  
+  h1 {
+    font-size: 2rem;
+    font-weight: 700;
+    letter-spacing: -0.025em;
+  }
+  
+  nav {
+    margin-top: 1rem;
+  }
+  
+  nav ul {
+    list-style-type: none;
+    display: flex;
+    gap: 2rem;
+  }
+  
+  nav a {
+    color: var(--foreground);
+    text-decoration: none;
+    font-weight: 500;
+    transition: opacity 0.2s ease-in-out;
+  }
+  
+  nav a:hover {
+    opacity: 0.7;
+  }
+  
+  main {
+    max-width: 100%;
+    margin: 0 auto;
+    border-radius: 0 0 10px 10px; /* Rounded corners at the bottom */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Optional for better readability */
     padding: 1rem;
-}
-
-h2 {
-    border-bottom: 2px solid var(--primary-color);
+  }
+  
+  section {
+    margin-bottom: 3rem;
+  }
+  
+  h2 {
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-bottom: 1.5rem;
     padding-bottom: 0.5rem;
-    margin-bottom: 1rem;
-}
-
-form {
-    margin-bottom: 1rem;
-}
-
-input[type="text"],
-input[type="number"],
-input[type="email"],
-textarea,
-select {
+    border-bottom: 1px solid var(--border);
+  }
+  
+  form {
+    display: grid;
+    gap: 1rem;
+    margin-bottom: 2rem;
+  }
+  
+  input[type="text"],
+  input[type="number"],
+  textarea {
     width: 100%;
-    padding: 0.5rem;
-    margin: 0.5rem 0;
-    border: 1px solid var(--border-color);
-    border-radius: 4px;
-    background-color: var(--light-background);
-    color: var(--text-color);
-}
-
-input[type="submit"],
+    padding: 0.75rem;
+    border: 1px solid var(--border);
+    background-color: var(--background);
+    color: var(--foreground);
+    font-size: 1rem;
+    transition: border-color 0.2s ease-in-out;
+  }
+  
+  input[type="text"]:focus,
+  input[type="number"]:focus,
+  textarea:focus {
+    outline: none;
+    border-color: var(--focus);
+  }
+  
+ /* Set uniform button size */
 button {
-    background-color: var(--primary-color);
-    color: var(--text-color);
+    background-color: var(--foreground); /* Black background */
+    color: var(--background); /* White text */
     border: none;
-    padding: 0.5rem 1rem;
-    border-radius: 4px;
+    padding: 0.6rem 1.2rem;
+    font-size: 1rem;
+    font-weight: 500;
     cursor: pointer;
-}
-
-input[type="submit"]:hover,
-button:hover {
-    background-color: #d68a1c;
-}
-
-table {
+    transition: opacity 0.2s ease-in-out;
+    width: 120px; /* Set a fixed width for all buttons */
+    text-align: center;
+    margin-bottom: 8px;
+    border-radius: 8px;
+  }
+  
+  /* Button hover effect */
+  button:hover {
+    opacity: 0.8;
+  }
+  
+  /* Edit and Delete button styling */
+  .actions {
+    display: flex;
+    gap: 1rem; /* Add spacing between buttons */
+  }
+  
+  .btn-secondary {
+    background-color: var(--background); /* White background */
+    color: var(--foreground); /* Black text */
+    border: 1px solid var(--border);
+  }
+  
+  .btn-secondary:hover {
+    background-color: var(--hover);
+  }
+  
+  /* Delete button styling - Red button */
+  .btn-danger {
+    background-color: #ff3b30; /* Red background */
+    color: var(--background); /* White text */
+  }
+  
+  .btn-danger:hover {
+    opacity: 0.8;
+  }
+  
+  
+  button:hover {
+    opacity: 0.8;
+  }
+  
+  table {
     width: 100%;
     border-collapse: collapse;
-    margin-bottom: 1rem;
-}
-
-table th,
-table td {
-    padding: 0.75rem;
-    border: 1px solid var(--primary-color);
-}
-
-table th {
-    background-color: var(--primary-color);
-    color: var(--text-color);
+  }
+  
+  th, td {
     text-align: left;
-}
-
-table td {
-    background-color: var(--light-background);
-}
-
-img {
-    max-width: 100px;
-    height: auto;
-    border-radius: 4px;
-}
-
-@media (max-width: 768px) {
-    header {
-        text-align: center;
-    }
-
-    nav ul {
-        text-align: center;
-    }
-
-    nav ul li {
-        display: block;
-        margin-bottom: 0.5rem;
-    }
-
-    form input,
-    form textarea,
-    form select {
-        width: 100%;
-    }
-}
+    padding: 1rem;
+    border-bottom: 1px solid var(--border);
+  }
+  
+  th {
+    font-weight: 600;
+    background-color: var(--background);
+  }
+  
+  tr:hover {
+    background-color: var(--hover);
+  }
+  
+  /* Utility classes */
+  .grid-2 {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 2rem;
+  }
+  
+  .actions {
+    display: flex;
+    gap: 0.5rem;
+  }
+  
+  .btn-secondary {
+    background-color: var(--background);
+    color: var(--foreground);
+    border: 1px solid var(--border);
+  }
+  
+  .btn-secondary:hover {
+    background-color: var(--hover);
+  }
+  
+  .btn-danger {
+    background-color: #ff3b30;
+    color: var(--background);
+  }
+  
+  .btn-danger:hover {
+    opacity: 0.9;
+  }
